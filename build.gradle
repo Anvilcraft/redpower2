@@ -23,9 +23,9 @@ apply plugin: 'maven-publish'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-version = "1.0"
-group= "modgroup"
-archivesBaseName = "modid"
+version = "2.0pr7-dirty"
+group= "com.eloraam.redpower"
+archivesBaseName = "redpower"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"

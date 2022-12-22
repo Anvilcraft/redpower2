@@ -1,0 +1,18 @@
+tile.rpcpu.name=Central Processing Unit
+tile.rpdiskdrive.name=Disk Drive
+tile.rpdisplay.name=Monitor
+tile.rpioexp.name=IO Expander
+tile.rpbackplane.name=Backplane
+tile.rpram.name=8K RAM Module
+tile.ribbon.name=Ribbon Cable
+
+item.disk.forth.name=FORTH Boot Disk
+item.disk.forthxp.name=Extended FORTH Disk
+item.disk.name=Blank Floppy
+
+gui.cpu.diskid=Disk: %d
+gui.cpu.consoleid=Console: %d
+gui.cpu.selfid=ID: %d
+gui.cpu.start=START
+gui.cpu.halt=HALT
+gui.cpu.reset=RESET

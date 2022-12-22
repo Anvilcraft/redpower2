@@ -1,0 +1,18 @@
+tile.rpcpu.name=Центральный процессор
+tile.rpdiskdrive.name=Дисковод
+tile.rpdisplay.name=Монитор
+tile.rpioexp.name=Расширитель Ввода/Вывода
+tile.rpbackplane.name=Объединительная плата
+tile.rpram.name=Модуль ОЗУ на 8K
+tile.ribbon.name=Ленточный кабель
+
+item.disk.forth.name=Загрузочная дискета с FORTH
+item.disk.forthxp.name=Расширенная дискета с FORTH
+item.disk.name=Пустая дискета
+
+gui.cpu.diskid=Дисковод: %d
+gui.cpu.consoleid=Консоль: %d
+gui.cpu.selfid=ID: %d
+gui.cpu.start=ПУСК
+gui.cpu.halt=СТОП
+gui.cpu.reset=СБРОС

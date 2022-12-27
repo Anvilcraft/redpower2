@@ -31,7 +31,7 @@ import net.minecraft.item.ItemStack;
    modid = "RedPowerNEIPlugin",
    name = "RedPower NEI Plugin",
    version = "1.4.3.1",
-   dependencies = "after:NotEnoughItems;after:RedPowerBase;after:RedPowerCompat;after:RedPowerControl;after:RedPowerCore;after:RedPowerLighting;after:RedPowerLogic;after:RedPowerMachine;after:RedPowerWiring;after:RedPowerWorld"
+   dependencies = "required-after:NotEnoughItems;after:RedPowerBase;after:RedPowerCompat;after:RedPowerControl;after:RedPowerCore;after:RedPowerLighting;after:RedPowerLogic;after:RedPowerMachine;after:RedPowerWiring;after:RedPowerWorld"
 )
 public class RedPowerNEIPlugin {
    @Instance("RedPowerNEIPlugin")

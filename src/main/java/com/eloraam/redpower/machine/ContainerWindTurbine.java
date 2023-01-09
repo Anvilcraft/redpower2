@@ -34,7 +34,7 @@ public class ContainerWindTurbine extends Container {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileWT.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileWT.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

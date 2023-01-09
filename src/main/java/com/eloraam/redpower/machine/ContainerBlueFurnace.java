@@ -38,7 +38,7 @@ public class ContainerBlueFurnace extends Container {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileFurnace.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileFurnace.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

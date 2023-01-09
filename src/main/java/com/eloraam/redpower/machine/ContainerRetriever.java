@@ -45,7 +45,7 @@ public class ContainerRetriever extends Container implements IHandleGuiEvent {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileRetriever.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileRetriever.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

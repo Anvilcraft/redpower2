@@ -35,7 +35,7 @@ public class ContainerDeploy extends Container {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileDeploy.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileDeploy.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

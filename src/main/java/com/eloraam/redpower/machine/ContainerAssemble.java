@@ -49,7 +49,7 @@ public class ContainerAssemble extends Container implements IHandleGuiEvent {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileAssemble.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileAssemble.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

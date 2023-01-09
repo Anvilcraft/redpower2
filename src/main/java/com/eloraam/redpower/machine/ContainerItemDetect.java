@@ -41,7 +41,7 @@ public class ContainerItemDetect extends Container implements IHandleGuiEvent {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileDetect.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileDetect.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

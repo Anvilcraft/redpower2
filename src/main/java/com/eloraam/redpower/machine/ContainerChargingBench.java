@@ -38,7 +38,7 @@ public class ContainerChargingBench extends Container {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileCB.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileCB.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

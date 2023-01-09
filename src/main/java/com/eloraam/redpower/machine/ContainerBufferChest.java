@@ -35,7 +35,7 @@ public class ContainerBufferChest extends Container {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileBuffer.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileBuffer.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

@@ -45,7 +45,7 @@ public class ContainerSorter extends Container implements IHandleGuiEvent {
    }
 
    public boolean canInteractWith(EntityPlayer player) {
-      return this.tileSorter.isUseableByPlayer(player);
+      return player.worldObj.isRemote || this.tileSorter.isUseableByPlayer(player);
    }
 
    public ItemStack transferStackInSlot(EntityPlayer player, int i) {

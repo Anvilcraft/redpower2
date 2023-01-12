@@ -86,7 +86,7 @@ public abstract class BluePowerConductor {
     }
 
     public double getVoltage() {
-        long lt = this.getParent().getWorldObj().getWorldTime();
+        long lt = this.getParent().getWorldObj().getTotalWorldTime();
         if ((lt & 65535L) == (long) this.lastTick) {
             return this.Vcap;
         } else {

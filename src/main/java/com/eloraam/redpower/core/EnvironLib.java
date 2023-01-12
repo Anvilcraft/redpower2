@@ -10,7 +10,7 @@ public class EnvironLib {
             return 0.5;
         } else {
             double nv = FractalLib.noise1D(
-                2576710L, (double) world.getWorldTime() * 1.0E-4, 0.6F, 5
+                2576710L, (double) world.getTotalWorldTime() * 1.0E-4, 0.6F, 5
             );
             nv = Math.max(0.0, 1.6 * (nv - 0.5) + 0.5);
             if (world.getWorldInfo().getTerrainType() != WorldType.FLAT) {

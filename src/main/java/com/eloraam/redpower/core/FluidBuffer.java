@@ -20,7 +20,7 @@ public abstract class FluidBuffer {
     }
 
     public int getLevel() {
-        long lt = this.getParent().getWorldObj().getWorldTime();
+        long lt = this.getParent().getWorldObj().getTotalWorldTime();
         if ((lt & 65535L) == (long) this.lastTick) {
             return this.Level;
         } else {

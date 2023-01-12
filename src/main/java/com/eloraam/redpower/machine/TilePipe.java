@@ -136,7 +136,7 @@ public class TilePipe extends TileCovered implements IPipeConnectable {
                 super.worldObj, this, new WorldCoord(this), this.ConCache
             );
             this.markDirty();
-            if ((super.worldObj.getWorldTime() & 16L) == 0L) {
+            if ((super.worldObj.getTotalWorldTime() & 16L) == 0L) {
                 this.hasChanged = true;
                 this.markForUpdate();
                 this.markDirty();

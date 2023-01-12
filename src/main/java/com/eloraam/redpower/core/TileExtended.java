@@ -114,9 +114,10 @@ public abstract class TileExtended extends TileEntity {
         super.worldObj.setBlockToAir(super.xCoord, super.yCoord, super.zCoord);
     }
 
+    @Override
     public void updateEntity() {
         if (!super.worldObj.isRemote && this.timeSched >= 0L) {
-            long wtime = super.worldObj.getWorldTime();
+            long wtime = super.worldObj.getTotalWorldTime();
             if (this.timeSched > wtime + 1200L) {
                 this.timeSched = wtime + 1200L;
             } else if (this.timeSched <= wtime) {

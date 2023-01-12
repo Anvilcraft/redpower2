@@ -15,67 +15,69 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderDisplay extends RenderCustomBlock {
-   private RenderContext context = new RenderContext();
+    private RenderContext context = new RenderContext();
 
-   public RenderDisplay(Block block) {
-      super(block);
-   }
+    public RenderDisplay(Block block) {
+        super(block);
+    }
 
-   public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
-      TileDisplay display = (TileDisplay)tile;
-      World world = display.getWorldObj();
-      GL11.glDisable(2896);
-      Tessellator tess = Tessellator.instance;
-      this.context.bindBlockTexture();
-      this.context.setDefaults();
-      this.context.setLocalLights(0.5F, 1.0F, 0.8F, 0.8F, 0.6F, 0.6F);
-      this.context.setPos(x, y, z);
-      this.context.readGlobalLights(world, display.xCoord, display.yCoord, display.zCoord);
-      this.context
-         .setIcon(
+    public void renderTileEntityAt(
+        TileEntity tile, double x, double y, double z, float partialTicks
+    ) {
+        TileDisplay display = (TileDisplay) tile;
+        World world = display.getWorldObj();
+        GL11.glDisable(2896);
+        Tessellator tess = Tessellator.instance;
+        this.context.bindBlockTexture();
+        this.context.setDefaults();
+        this.context.setLocalLights(0.5F, 1.0F, 0.8F, 0.8F, 0.6F, 0.6F);
+        this.context.setPos(x, y, z);
+        this.context.readGlobalLights(
+            world, display.xCoord, display.yCoord, display.zCoord
+        );
+        this.context.setIcon(
             RedPowerControl.peripheralBottom,
             RedPowerControl.peripheralTop,
             RedPowerControl.peripheralSide,
             RedPowerControl.peripheralSide,
             RedPowerControl.displayFront,
             RedPowerControl.peripheralBack
-         );
-      this.context.setSize(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
-      this.context.setupBox();
-      this.context.transform();
-      this.context.rotateTextures(display.Rotation);
-      tess.startDrawingQuads();
-      this.context.renderGlobFaces(63);
-      tess.draw();
-      GL11.glEnable(2896);
-   }
+        );
+        this.context.setSize(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
+        this.context.setupBox();
+        this.context.transform();
+        this.context.rotateTextures(display.Rotation);
+        tess.startDrawingQuads();
+        this.context.renderGlobFaces(63);
+        tess.draw();
+        GL11.glEnable(2896);
+    }
 
-   @Override
-   public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-      Tessellator tess = Tessellator.instance;
-      super.block.setBlockBoundsForItemRender();
-      this.context.setDefaults();
-      this.context.useNormal = true;
-      if (type == ItemRenderType.INVENTORY) {
-         this.context.setPos(-0.5, -0.5, -0.5);
-      } else {
-         this.context.setPos(0.0, 0.0, 0.0);
-      }
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        Tessellator tess = Tessellator.instance;
+        super.block.setBlockBoundsForItemRender();
+        this.context.setDefaults();
+        this.context.useNormal = true;
+        if (type == ItemRenderType.INVENTORY) {
+            this.context.setPos(-0.5, -0.5, -0.5);
+        } else {
+            this.context.setPos(0.0, 0.0, 0.0);
+        }
 
-      this.context.setOrientation(0, 3);
-      this.context
-         .setIcon(
+        this.context.setOrientation(0, 3);
+        this.context.setIcon(
             RedPowerControl.peripheralBottom,
             RedPowerControl.peripheralTop,
             RedPowerControl.peripheralSide,
             RedPowerControl.peripheralSide,
             RedPowerControl.displayFront,
             RedPowerControl.peripheralBack
-         );
-      this.context.setLocalLights(0.5F, 1.0F, 0.8F, 0.8F, 0.6F, 0.6F);
-      tess.startDrawingQuads();
-      this.context.renderBox(63, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
-      tess.draw();
-      this.context.useNormal = false;
-   }
+        );
+        this.context.setLocalLights(0.5F, 1.0F, 0.8F, 0.8F, 0.6F, 0.6F);
+        tess.startDrawingQuads();
+        this.context.renderBox(63, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
+        tess.draw();
+        this.context.useNormal = false;
+    }
 }

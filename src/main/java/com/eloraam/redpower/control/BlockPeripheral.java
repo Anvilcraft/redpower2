@@ -7,36 +7,37 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockPeripheral extends BlockExtended {
-   public BlockPeripheral() {
-      super(Material.rock);
-      this.setHardness(2.0F);
-      this.setCreativeTab(CreativeExtraTabs.tabMachine);
-   }
+    public BlockPeripheral() {
+        super(Material.rock);
+        this.setHardness(2.0F);
+        this.setCreativeTab(CreativeExtraTabs.tabMachine);
+    }
 
-   @Override
-   public boolean isOpaqueCube() {
-      return true;
-   }
+    @Override
+    public boolean isOpaqueCube() {
+        return true;
+    }
 
-   public boolean isNormalCube() {
-      return true;
-   }
+    public boolean isNormalCube() {
+        return true;
+    }
 
-   @Override
-   public boolean renderAsNormalBlock() {
-      return true;
-   }
+    @Override
+    public boolean renderAsNormalBlock() {
+        return true;
+    }
 
-   public boolean isBlockNormalCube() {
-      return false;
-   }
+    public boolean isBlockNormalCube() {
+        return false;
+    }
 
-   public boolean isSideSolid(IBlockAccess world, int i, int j, int k, ForgeDirection side) {
-      return true;
-   }
+    public boolean
+    isSideSolid(IBlockAccess world, int i, int j, int k, ForgeDirection side) {
+        return true;
+    }
 
-   @Override
-   public int damageDropped(int i) {
-      return i;
-   }
+    @Override
+    public int damageDropped(int i) {
+        return i;
+    }
 }

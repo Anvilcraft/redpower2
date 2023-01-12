@@ -1,5 +1,5 @@
 package com.eloraam.redpower.core;
 
 public interface IRedPowerConnectable extends IConnectable {
-   int getPoweringMask(int var1);
+    int getPoweringMask(int var1);
 }

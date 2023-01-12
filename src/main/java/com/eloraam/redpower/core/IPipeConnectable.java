@@ -1,11 +1,11 @@
 package com.eloraam.redpower.core;
 
 public interface IPipeConnectable {
-   int getPipeConnectableSides();
+    int getPipeConnectableSides();
 
-   int getPipeFlangeSides();
+    int getPipeFlangeSides();
 
-   int getPipePressure(int var1);
+    int getPipePressure(int var1);
 
-   FluidBuffer getPipeBuffer(int var1);
+    FluidBuffer getPipeBuffer(int var1);
 }

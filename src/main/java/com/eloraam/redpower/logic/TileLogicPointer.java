@@ -69,14 +69,14 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
 
             super.Powered = false;
             super.Disabled = false;
-            this.timestart = super.worldObj.getWorldTime();
+            this.timestart = super.worldObj.getTotalWorldTime();
             this.updateBlock();
         } else if (super.Disabled) {
             if (ps > 0) {
                 return;
             }
 
-            this.timestart = super.worldObj.getWorldTime();
+            this.timestart = super.worldObj.getTotalWorldTime();
             super.Disabled = false;
             this.updateBlock();
         } else {
@@ -108,7 +108,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
 
                 super.Disabled = false;
                 super.Powered = false;
-                this.timestart = super.worldObj.getWorldTime();
+                this.timestart = super.worldObj.getTotalWorldTime();
                 this.updateBlock();
                 return;
             }
@@ -120,14 +120,14 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
                 this.scheduleTick(2);
             }
 
-            this.timestart = super.worldObj.getWorldTime();
+            this.timestart = super.worldObj.getTotalWorldTime();
             this.updateBlockChange();
         } else if (super.Disabled) {
             if (ps > 0) {
                 return;
             }
 
-            this.timestart = super.worldObj.getWorldTime();
+            this.timestart = super.worldObj.getTotalWorldTime();
             super.Disabled = false;
             this.updateBlock();
         } else {
@@ -142,7 +142,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
 
     private void timerUpdate() {
         if (!super.worldObj.isRemote && !super.Powered && !super.Disabled) {
-            long wt = super.worldObj.getWorldTime();
+            long wt = super.worldObj.getTotalWorldTime();
             if (this.interval < 2L) {
                 this.interval = 2L;
             }
@@ -161,7 +161,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
     }
 
     private void sequencerUpdate() {
-        long wt = super.worldObj.getWorldTime() + 6000L;
+        long wt = super.worldObj.getTotalWorldTime() + 6000L;
         float f = (float) wt / (float) (this.interval * 4L);
         int i = (int) Math.floor((double) (f * 4.0F));
         if (super.Deadmap == 1) {
@@ -189,7 +189,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
         boolean ps3 = super.Deadmap == 0 ? (ps & 3) > 0 : (ps & 6) > 0;
         if (super.Disabled && !ps3) {
             super.Disabled = false;
-            this.timestart = super.worldObj.getWorldTime();
+            this.timestart = super.worldObj.getTotalWorldTime();
             this.updateBlock();
         } else if (!super.Disabled && ps3) {
             super.Disabled = true;
@@ -207,7 +207,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
         if (!super.Active && super.Powered) {
             super.Powered = false;
             super.Active = true;
-            this.timestart = super.worldObj.getWorldTime();
+            this.timestart = super.worldObj.getTotalWorldTime();
             this.updateBlockChange();
         } else if (super.Active && super.Powered) {
             super.Powered = false;
@@ -219,7 +219,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
     private void stateCellUpdate() {
         if (!super.worldObj.isRemote && super.Active && !super.Powered
             && !super.Disabled) {
-            long wt = super.worldObj.getWorldTime();
+            long wt = super.worldObj.getTotalWorldTime();
             if (this.interval < 2L) {
                 this.interval = 2L;
             }
@@ -323,7 +323,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
     public float getPointerDirection(float partialTicks) {
         if (super.SubId == 0) {
             if (!super.Powered && !super.Disabled) {
-                long wt = super.worldObj.getWorldTime();
+                long wt = super.worldObj.getTotalWorldTime();
                 float ivt = ((float) wt + partialTicks - (float) this.timestart)
                     / (float) this.interval;
                 if (ivt > 1.0F) {
@@ -335,7 +335,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
                 return 0.75F;
             }
         } else if (super.SubId == 1) {
-            long wt = super.worldObj.getWorldTime() + 6000L;
+            long wt = super.worldObj.getTotalWorldTime() + 6000L;
             float ivt = ((float) wt + partialTicks) / (float) (this.interval * 4L);
             if (super.Deadmap == 1) {
                 ivt = 0.75F - ivt;
@@ -365,7 +365,7 @@ public class TileLogicPointer extends TileLogic implements IPointerTile {
                 }
             }
 
-            long wt = super.worldObj.getWorldTime();
+            long wt = super.worldObj.getTotalWorldTime();
             float ivt = ((float) wt + partialTicks - (float) this.timestart)
                 / (float) this.interval;
             return super.Deadmap > 0 ? 1.0F - 0.2F * ivt : 0.5F + 0.2F * ivt;

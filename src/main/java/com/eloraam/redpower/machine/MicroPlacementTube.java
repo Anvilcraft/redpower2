@@ -88,7 +88,8 @@ public class MicroPlacementTube implements IMicroPlacement {
 
     @Override
     public void addCreativeItems(int hb, CreativeTabs tab, List<ItemStack> items) {
-        if (tab == CreativeExtraTabs.tabMachine || tab == CreativeTabs.tabAllSearch) {
+        if (tab == null || tab == CreativeExtraTabs.tabMachine
+            || tab == CreativeTabs.tabAllSearch) {
             switch (hb) {
                 case 7:
                     items.add(new ItemStack(CoverLib.blockCoverPlate, 1, 1792));

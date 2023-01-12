@@ -16,7 +16,8 @@ public class MicroPlacementRibbon extends MicroPlacementWire {
 
     @Override
     public void addCreativeItems(int hb, CreativeTabs tab, List<ItemStack> items) {
-        if (tab == CreativeExtraTabs.tabWires || tab == CreativeTabs.tabAllSearch) {
+        if (tab == null || tab == CreativeExtraTabs.tabWires
+            || tab == CreativeTabs.tabAllSearch) {
             switch (hb) {
                 case 12:
                     items.add(new ItemStack(CoverLib.blockCoverPlate, 1, 3072));

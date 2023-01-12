@@ -153,7 +153,8 @@ public class MicroPlacementJacket implements IMicroPlacement {
 
     @Override
     public void addCreativeItems(int hb, CreativeTabs tab, List<ItemStack> itemList) {
-        if (tab == CreativeExtraTabs.tabWires || tab == CreativeTabs.tabAllSearch) {
+        if (tab == null || tab == CreativeExtraTabs.tabWires
+            || tab == CreativeTabs.tabAllSearch) {
             switch (hb) {
                 case 64:
                     itemList.add(new ItemStack(CoverLib.blockCoverPlate, 1, 16386));

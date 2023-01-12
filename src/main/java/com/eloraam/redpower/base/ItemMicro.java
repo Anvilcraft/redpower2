@@ -136,6 +136,7 @@ public class ItemMicro extends ItemBlock {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public boolean func_150936_a(
         World world, int x, int y, int z, int side, EntityPlayer player, ItemStack ist
     ) {
@@ -300,8 +301,11 @@ public class ItemMicro extends ItemBlock {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void getSubItems(Item id, CreativeTabs tab, List list) {
-        if (tab != CreativeExtraTabs.tabWires && tab != CreativeExtraTabs.tabMachine) {
+        // NEI passes null as tab
+        if (tab != null && tab != CreativeExtraTabs.tabWires
+            && tab != CreativeExtraTabs.tabMachine) {
             if (tab == CreativeExtraTabs.tabMicros) {
                 for (int i = 0; i < 255; ++i) {
                     String stub = CoverLib.getName(i);

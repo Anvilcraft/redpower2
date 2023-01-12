@@ -8,7 +8,6 @@ import java.util.Random;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.ShapedRecipeHandler;
-import codechicken.nei.recipe.TemplateRecipeHandler.CachedRecipe;
 import com.eloraam.redpower.RedPowerBase;
 import com.eloraam.redpower.base.ItemHandsaw;
 import com.eloraam.redpower.core.CoverLib;

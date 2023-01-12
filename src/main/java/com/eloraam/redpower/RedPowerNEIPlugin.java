@@ -47,7 +47,7 @@ public class RedPowerNEIPlugin {
     public static boolean base;
     public static boolean compat;
     static Block micro;
-    private List<RedPowerNEIPlugin.ItemRange> validMicroTypes = new ArrayList();
+    private List<RedPowerNEIPlugin.ItemRange> validMicroTypes = new ArrayList<>();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {}
@@ -58,9 +58,7 @@ public class RedPowerNEIPlugin {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         if (FMLCommonHandler.instance().getSide().isServer()) {
-            FMLLog.severe(
-                "[RedPowerNEIPlugin] Server env detected, disabling...", new Object[0]
-            );
+            FMLLog.severe("[RedPowerNEIPlugin] Server env detected, disabling...");
         } else {
             if (Loader.isModLoaded("NotEnoughItems")) {
                 wiring = Loader.isModLoaded("RedPowerWiring");
@@ -97,7 +95,7 @@ public class RedPowerNEIPlugin {
     }
 
     private void loadSaws() {
-        List<ItemHandsaw> saws = new ArrayList();
+        List<ItemHandsaw> saws = new ArrayList<>();
 
         for (Object item : Item.itemRegistry) {
             if (item instanceof ItemHandsaw) {

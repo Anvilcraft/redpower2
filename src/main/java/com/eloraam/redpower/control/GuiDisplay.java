@@ -97,7 +97,7 @@ public class GuiDisplay extends GuiContainer {
                     }
 
                     if (this.disp.cursMode == 2) {
-                        long tm = super.mc.theWorld.getWorldTime();
+                        long tm = super.mc.theWorld.getTotalWorldTime();
                         if ((tm >> 2 & 1L) > 0L) {
                             b ^= 128;
                         }

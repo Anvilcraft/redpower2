@@ -64,7 +64,7 @@ public abstract class TileExtended extends TileEntity {
     }
 
     public void scheduleTick(int time) {
-        long tn = super.worldObj.getWorldTime() + (long) time;
+        long tn = super.worldObj.getTotalWorldTime() + (long) time;
         if (this.timeSched <= 0L || this.timeSched >= tn) {
             this.timeSched = tn;
             this.updateBlock();
@@ -72,7 +72,7 @@ public abstract class TileExtended extends TileEntity {
     }
 
     public boolean isTickRunnable() {
-        return this.timeSched >= 0L && this.timeSched <= super.worldObj.getWorldTime();
+        return this.timeSched >= 0L && this.timeSched <= super.worldObj.getTotalWorldTime();
     }
 
     public boolean isTickScheduled() {

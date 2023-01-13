@@ -52,7 +52,6 @@ public class TileAccel
             return TileAccel.this;
         }
     };
-    private boolean hasChanged = false;
     public int ConMask = -1;
     public int conCache = -1;
 
@@ -80,7 +79,6 @@ public class TileAccel
         } else {
             item.side = (byte) side;
             this.flow.add(item);
-            this.hasChanged = true;
             this.markDirty();
             return true;
         }
@@ -100,7 +98,6 @@ public class TileAccel
     public void addTubeItem(TubeItem ti) {
         ti.side = (byte) (ti.side ^ 1);
         this.flow.add(ti);
-        this.hasChanged = true;
         this.markDirty();
     }
 
@@ -183,11 +180,8 @@ public class TileAccel
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (this.flow.update()) {
-            this.hasChanged = true;
-        }
 
-        if (this.hasChanged) {
+        if (this.flow.update()) {
             if (!super.worldObj.isRemote) {
                 this.markForUpdate();
             }
@@ -253,6 +247,10 @@ public class TileAccel
 
     @Override
     protected void writeToPacket(NBTTagCompound data) {
+        super.writeToPacket(data);
+        data.setInteger("cc", this.conCache);
+        data.setBoolean("po", this.powered);
+
         int cs = this.flow.contents.size();
         if (cs > 6) {
             cs = 6;
@@ -267,26 +265,19 @@ public class TileAccel
             ti.writeToPacket(itag);
             data.setTag("cs" + i, itag);
         }
-
-        if (this.hasChanged) {
-            this.hasChanged = false;
-            data.setBoolean("data", true);
-            super.writeToPacket(data);
-        }
     }
 
     @Override
     protected void readFromPacket(NBTTagCompound data) {
+        super.readFromPacket(data);
+        this.conCache = data.getInteger("cc");
+        this.powered = data.getBoolean("p");
+
         this.flow.contents.clear();
         int cs = data.getInteger("cs");
 
         for (int i = 0; i < cs; ++i) {
-            this.flow.contents.add(TubeItem.newFromPacket((NBTTagCompound
-            ) data.getTag("cs" + i)));
-        }
-
-        if (data.hasKey("data")) {
-            super.readFromPacket(data);
+            this.flow.contents.add(TubeItem.newFromPacket(data.getCompoundTag("cs" + i)));
         }
     }
 }

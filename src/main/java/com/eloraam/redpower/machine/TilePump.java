@@ -93,12 +93,12 @@ public class TilePump
         if (RedPowerLib.isPowered(
                 super.worldObj, super.xCoord, super.yCoord, super.zCoord, 16777215, 63
             )) {
-            if (!super.Powered) {
-                super.Powered = true;
+            if (!super.powered) {
+                super.powered = true;
                 this.markDirty();
             }
         } else {
-            super.Powered = false;
+            super.powered = false;
             this.markDirty();
         }
     }
@@ -168,7 +168,7 @@ public class TilePump
                     this.updateBlock();
                 }
 
-                if (super.Charged && super.Powered) {
+                if (super.Charged && super.powered) {
                     super.Active = true;
                 }
 
@@ -181,7 +181,7 @@ public class TilePump
 
     @Override
     public void onTileTick() {
-        if (!super.worldObj.isRemote && !super.Powered) {
+        if (!super.worldObj.isRemote && !super.powered) {
             super.Active = false;
             this.updateBlock();
         }

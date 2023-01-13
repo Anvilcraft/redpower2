@@ -19,7 +19,7 @@ import net.minecraft.world.IBlockAccess;
 public class TileMachinePanel extends TileMultipart implements IRotatable, IFrameSupport {
     public int Rotation = 0;
     public boolean Active = false;
-    public boolean Powered = false;
+    public boolean powered = false;
     public boolean Delay = false;
     public boolean Charged = false;
 
@@ -133,7 +133,7 @@ public class TileMachinePanel extends TileMultipart implements IRotatable, IFram
     @Override
     public void writeFramePacket(NBTTagCompound tag) {
         tag.setByte("rot", (byte) this.Rotation);
-        int ps = (this.Active ? 1 : 0) | (this.Powered ? 2 : 0) | (this.Delay ? 4 : 0)
+        int ps = (this.Active ? 1 : 0) | (this.powered ? 2 : 0) | (this.Delay ? 4 : 0)
             | (this.Charged ? 8 : 0);
         tag.setByte("ps", (byte) ps);
     }
@@ -143,7 +143,7 @@ public class TileMachinePanel extends TileMultipart implements IRotatable, IFram
         this.Rotation = tag.getByte("rot");
         int ps = tag.getByte("ps");
         this.Active = (ps & 1) > 0;
-        this.Powered = (ps & 2) > 0;
+        this.powered = (ps & 2) > 0;
         this.Delay = (ps & 4) > 0;
         this.Charged = (ps & 8) > 0;
     }
@@ -163,7 +163,7 @@ public class TileMachinePanel extends TileMultipart implements IRotatable, IFram
         byte k = data.getByte("ps");
         this.Rotation = data.getByte("rot");
         this.Active = (k & 1) > 0;
-        this.Powered = (k & 2) > 0;
+        this.powered = (k & 2) > 0;
         this.Delay = (k & 4) > 0;
         this.Charged = (k & 8) > 0;
     }
@@ -171,7 +171,7 @@ public class TileMachinePanel extends TileMultipart implements IRotatable, IFram
     @Override
     public void writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
-        int ps = (this.Active ? 1 : 0) | (this.Powered ? 2 : 0) | (this.Delay ? 4 : 0)
+        int ps = (this.Active ? 1 : 0) | (this.powered ? 2 : 0) | (this.Delay ? 4 : 0)
             | (this.Charged ? 8 : 0);
         data.setByte("ps", (byte) ps);
         data.setByte("rot", (byte) this.Rotation);
@@ -182,7 +182,7 @@ public class TileMachinePanel extends TileMultipart implements IRotatable, IFram
         this.Rotation = data.getByte("rot");
         int ps = data.getByte("ps");
         this.Active = (ps & 1) > 0;
-        this.Powered = (ps & 2) > 0;
+        this.powered = (ps & 2) > 0;
         this.Delay = (ps & 4) > 0;
         this.Charged = (ps & 8) > 0;
         this.updateLight();
@@ -191,7 +191,7 @@ public class TileMachinePanel extends TileMultipart implements IRotatable, IFram
     @Override
     protected void writeToPacket(NBTTagCompound data) {
         data.setByte("rot", (byte) this.Rotation);
-        int ps = (this.Active ? 1 : 0) | (this.Powered ? 2 : 0) | (this.Delay ? 4 : 0)
+        int ps = (this.Active ? 1 : 0) | (this.powered ? 2 : 0) | (this.Delay ? 4 : 0)
             | (this.Charged ? 8 : 0);
         data.setByte("ps", (byte) ps);
     }

@@ -33,7 +33,7 @@ import net.minecraftforge.client.event.TextureStitchEvent.Pre;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "RedPowerCore", name = "RedPower Core", version = "2.0pr6")
+@Mod(modid = "RedPowerCore", name = "RedPower Core", version = "2.0pr7")
 public class RedPowerCore {
     @Instance("RedPowerCore")
     public static RedPowerCore instance;

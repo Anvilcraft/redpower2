@@ -37,7 +37,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(
     modid = "RedPowerWiring",
     name = "RedPower Wiring",
-    version = "2.0pr6",
+    version = "2.0pr7",
     dependencies = "required-after:RedPowerBase"
 )
 public class RedPowerWiring {

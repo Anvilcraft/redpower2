@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 @Mod(
     modid = "RedPowerCompat",
     name = "RedPower Compat",
-    version = "2.0pr6",
+    version = "2.0pr7",
     dependencies
     = "required-after:RedPowerBase;required-after:RedPowerMachine;required-after:RedPowerWorld;after:IC2;after:Waila"
 )

@@ -1,9 +1,10 @@
 package com.eloraam.redpower.world;
 
+import java.util.List;
+
 import com.eloraam.redpower.RedPowerWorld;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,48 +17,58 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemCustomSeeds extends Item implements IPlantable {
-   public ItemCustomSeeds() {
-      this.setMaxDamage(0);
-      this.setHasSubtypes(true);
-      this.setCreativeTab(CreativeTabs.tabMaterials);
-      this.setUnlocalizedName("seedFlax");
-      this.setTextureName("rpworld:seedsFlax");
-   }
+    public ItemCustomSeeds() {
+        this.setMaxDamage(0);
+        this.setHasSubtypes(true);
+        this.setCreativeTab(CreativeTabs.tabMaterials);
+        this.setUnlocalizedName("seedFlax");
+        this.setTextureName("rpworld:seedsFlax");
+    }
 
-   public boolean onItemUse(ItemStack ist, EntityPlayer player, World world, int i, int j, int k, int l, float xp, float yp, float zp) {
-      if (l != 1) {
-         return false;
-      } else {
-         Block soil = world.getBlock(i, j, k);
-         if (soil == null) {
+    public boolean onItemUse(
+        ItemStack ist,
+        EntityPlayer player,
+        World world,
+        int i,
+        int j,
+        int k,
+        int l,
+        float xp,
+        float yp,
+        float zp
+    ) {
+        if (l != 1) {
             return false;
-         } else if (soil.canSustainPlant(world, i, j, k, ForgeDirection.UP, this) && world.getBlockMetadata(i, j, k) >= 1 && world.isAirBlock(i, j + 1, k)) {
-            world.setBlock(i, j + 1, k, RedPowerWorld.blockCrops, 0, 3);
-            --ist.stackSize;
-            return true;
-         } else {
-            return false;
-         }
-      }
-   }
+        } else {
+            Block soil = world.getBlock(i, j, k);
+            if (soil == null) {
+                return false;
+            } else if (soil.canSustainPlant(world, i, j, k, ForgeDirection.UP, this) && world.getBlockMetadata(i, j, k) >= 1 && world.isAirBlock(i, j + 1, k)) {
+                world.setBlock(i, j + 1, k, RedPowerWorld.blockCrops, 0, 3);
+                --ist.stackSize;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
-   @SideOnly(Side.CLIENT)
-   public void getSubItems(Item item, CreativeTabs tab, List list) {
-      for(int i = 0; i <= 0; ++i) {
-         list.add(new ItemStack(this, 1, i));
-      }
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
+        for (int i = 0; i <= 0; ++i) {
+            list.add(new ItemStack(this, 1, i));
+        }
+    }
 
-   }
+    public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) {
+        return EnumPlantType.Crop;
+    }
 
-   public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) {
-      return EnumPlantType.Crop;
-   }
+    public Block getPlant(IBlockAccess world, int x, int y, int z) {
+        return RedPowerWorld.blockCrops;
+    }
 
-   public Block getPlant(IBlockAccess world, int x, int y, int z) {
-      return RedPowerWorld.blockCrops;
-   }
-
-   public int getPlantMetadata(IBlockAccess world, int x, int y, int z) {
-      return 0;
-   }
+    public int getPlantMetadata(IBlockAccess world, int x, int y, int z) {
+        return 0;
+    }
 }

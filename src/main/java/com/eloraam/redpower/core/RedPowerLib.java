@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import com.eloraam.redpower.RedPowerCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockRedstoneWire;
@@ -212,13 +215,16 @@ public class RedPowerLib {
    }
 
    private static int getSidePowerMask(IBlockAccess iba, int x, int y, int z, int ch, int side) {
-      IRedPowerConnectable irp = CoreLib.getTileEntity(iba, x, y, z, IRedPowerConnectable.class);
+      TileEntity tile = CoreLib.getTileEntity(iba, x, y, z, TileEntity.class);
       int mask = getConDirMask(side);
-      if (irp != null) {
-         int m = irp.getPoweringMask(ch);
-         m = (m & 1431655765) << 1 | (m & 715827882) >> 1;
-         return m & mask;
-      } else if (ch != 0) {
+      for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+         if (adp.canHandle(tile)) {
+            int m = adp.getPoweringMask(ch, tile);
+            m = (m & 1431655765) << 1 | (m & 715827882) >> 1;
+            return m & mask;
+         }
+      } 
+      if (ch != 0) {
          return 0;
       } else {
          return isWeakPoweringTo(iba, x, y, z, side) ? mask & 16777215 : (isPoweringTo(iba, x, y, z, side) ? mask : 0);
@@ -355,10 +361,10 @@ public class RedPowerLib {
       if (iba.isAirBlock(i, j, k)) {
          return 0;
       } else {
-         IConnectable rpa = CoreLib.getTileEntity(iba, i, j, k, IConnectable.class);
-         if (rpa != null) {
-            int md = rpa.getConnectClass(side);
-            return isCompatible(md, pcl) ? rpa.getConnectableMask() : 0;
+         TileEntity tile = CoreLib.getTileEntity(iba, i, j, k, TileEntity.class);
+         if (isConnectable(tile)) {
+            int md = getConnectClass(side, tile);
+            return isCompatible(md, pcl) ? getConnectableMask(tile) : 0;
          } else if (!isCompatible(0, pcl)) {
             return 0;
          } else if (block == Blocks.piston || block == Blocks.sticky_piston) {
@@ -395,9 +401,9 @@ public class RedPowerLib {
       if (iba.isAirBlock(i, j, k)) {
          return 0;
       } else {
-         IConnectable rpa = CoreLib.getTileEntity(iba, i, j, k, IConnectable.class);
-         if (rpa != null) {
-            int cc2 = rpa.getCornerPowerMode();
+         TileEntity tile = CoreLib.getTileEntity(iba, i, j, k, TileEntity.class);
+         if (isConnectable(tile)) {
+            int cc2 = getCornerPowerMode(tile);
             if (cc == 0 || cc2 == 0) {
                return 0;
             } else if (cc == 2 && cc2 == 2) {
@@ -405,8 +411,8 @@ public class RedPowerLib {
             } else if (cc == 3 && cc2 == 1) {
                return 0;
             } else {
-               int pc = rpa.getConnectClass(side);
-               return isCompatible(pc, pcl) ? rpa.getConnectableMask() : 0;
+               int pc = getConnectClass(side, tile);
+               return isCompatible(pc, pcl) ? getConnectableMask(tile) : 0;
             }
          } else {
             return 0;
@@ -552,14 +558,19 @@ public class RedPowerLib {
    }
 
    public static int getTileCurrentStrength(World world, int i, int j, int k, int cons, int ch) {
-      IRedPowerConnectable irp = CoreLib.getTileEntity(world, i, j, k, IRedPowerConnectable.class);
-      if (irp == null) {
+      TileEntity tile = CoreLib.getTileEntity(world, i, j, k, TileEntity.class);
+      if (tile == null) {
          return -1;
-      } else if (irp instanceof IRedPowerWiring) {
-         IRedPowerWiring irw = (IRedPowerWiring)irp;
+      } else if (tile instanceof IRedPowerWiring) {
+         IRedPowerWiring irw = (IRedPowerWiring)tile;
          return irw.getCurrentStrength(cons, ch);
       } else {
-         return (irp.getPoweringMask(ch) & cons) > 0 ? 255 : -1;
+         for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+            if (adp.canHandle(tile)) {
+               return (adp.getPoweringMask(ch, tile) & cons) > 0 ? 255 : -1;
+            }
+         }
+         return -1;
       }
    }
 
@@ -571,14 +582,19 @@ public class RedPowerLib {
          int irp1 = world.getBlockMetadata(i, j, k);
          return irp1 > 0 ? irp1 : -1;
       } else {
-         IRedPowerConnectable irp = CoreLib.getTileEntity(world, i, j, k, IRedPowerConnectable.class);
-         if (irp == null) {
+         TileEntity tile = CoreLib.getTileEntity(world, i, j, k, TileEntity.class);
+         if (tile == null) {
             return -1;
-         } else if (irp instanceof IRedPowerWiring) {
-            IRedPowerWiring irw = (IRedPowerWiring)irp;
+         } else if (tile instanceof IRedPowerWiring) {
+            IRedPowerWiring irw = (IRedPowerWiring)tile;
             return irw.getCurrentStrength(cons, ch);
          } else {
-            return (irp.getPoweringMask(ch) & cons) > 0 ? 255 : -1;
+            for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+               if (adp.canHandle(tile)) {
+                  return (adp.getPoweringMask(ch, tile) & cons) > 0 ? 255 : -1;
+               }
+            }
+            return -1;
          }
       }
    }
@@ -873,6 +889,42 @@ public class RedPowerLib {
 
    public static boolean isCompatible(int a, int b) {
       return a == b || powerClassMapping.contains(new RedPowerLib.PowerClassCompat(a, b));
+   }
+
+   public static boolean isConnectable(TileEntity tile) {
+      for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+         if (adp.canHandle(tile)) {
+            return true;
+         }
+      }
+      return tile instanceof IConnectable;
+   }
+
+   public static int getConnectableMask(TileEntity tile) {
+      for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+         if (adp.canHandle(tile)) {
+            return adp.getConnectableMask(tile);
+         }
+      }
+      return ((IConnectable)tile).getConnectableMask();
+   }
+
+   public static int getConnectClass(int var1, TileEntity tile) {
+      for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+         if (adp.canHandle(tile)) {
+            return adp.getConnectClass(var1, tile);
+         }
+      }
+      return ((IConnectable)tile).getConnectClass(var1);
+   }
+
+   public static int getCornerPowerMode(TileEntity tile) {
+      for (IRedPowerConnectableAdaptor adp : RedPowerCore.redPowerAdaptors) {
+         if (adp.canHandle(tile)) {
+            return adp.getCornerPowerMode(tile);
+         }
+      }
+      return ((IConnectable)tile).getCornerPowerMode();
    }
 
    public static class PowerClassCompat {

@@ -1,6 +1,7 @@
 package com.eloraam.redpower;
 
 import com.eloraam.redpower.compat.BlockMachineCompat;
+import com.eloraam.redpower.compat.ComputercraftInterop;
 import com.eloraam.redpower.compat.ItemMachineCompat;
 import com.eloraam.redpower.compat.RenderBlueEngine;
 import com.eloraam.redpower.compat.TileBlueEngine;
@@ -69,7 +70,9 @@ public class RedPowerCompat implements IGuiHandler {
       if (event.getSide().isClient()) {
          this.registerRenderers();
       }
-
+      if (Loader.isModLoaded("ComputerCraft")) {
+         ComputercraftInterop.initInterop();
+      }
       NetworkRegistry.INSTANCE.registerGuiHandler(instance, instance);
    }
 

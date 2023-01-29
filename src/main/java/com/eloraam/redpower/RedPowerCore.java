@@ -4,7 +4,9 @@ import com.eloraam.redpower.core.Config;
 import com.eloraam.redpower.core.CoreEvents;
 import com.eloraam.redpower.core.CoreLib;
 import com.eloraam.redpower.core.CoverRecipe;
+import com.eloraam.redpower.core.IRedPowerConnectableAdaptor;
 import com.eloraam.redpower.core.PacketHandler;
+import com.eloraam.redpower.core.BaseConnectableAdaptor;
 import com.eloraam.redpower.core.RenderHighlight;
 import com.eloraam.redpower.core.RenderSimpleCovered;
 import com.eloraam.redpower.core.TileCovered;
@@ -22,6 +24,9 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ICrafting;
@@ -45,6 +50,7 @@ public class RedPowerCore {
    public static int nullBlockModel = -1;
    @SideOnly(Side.CLIENT)
    public static IIcon missing;
+   public static List<IRedPowerConnectableAdaptor> redPowerAdaptors = new ArrayList<>();
 
    @EventHandler
    public void preInit(FMLPreInitializationEvent event) {
@@ -54,7 +60,8 @@ public class RedPowerCore {
       if (FMLCommonHandler.instance().getSide().isClient()) {
          MinecraftForge.EVENT_BUS.register(instance);
       }
-
+      redPowerAdaptors = new ArrayList<>();
+      redPowerAdaptors.add(new BaseConnectableAdaptor());
    }
 
    @EventHandler

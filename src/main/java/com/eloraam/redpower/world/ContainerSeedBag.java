@@ -1,5 +1,6 @@
 package com.eloraam.redpower.world;
 
+import com.eloraam.redpower.RedPowerWorld;
 import com.eloraam.redpower.core.SlotLocked;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -45,7 +46,7 @@ public class ContainerSeedBag extends Container {
     }
 
     public boolean canInteractWith(EntityPlayer player) {
-        return player.inventory.getCurrentItem() == this.itemBag;
+        return player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == RedPowerWorld.itemSeedBag;
     }
 
     public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {

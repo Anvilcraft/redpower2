@@ -58,7 +58,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(
     modid = "RedPowerControl",
     name = "RedPower Control",
-    version = "2.0pr7",
+    version = RedPowerBase.VERSION,
     dependencies = "required-after:RedPowerBase"
 )
 public class RedPowerControl implements IGuiHandler {

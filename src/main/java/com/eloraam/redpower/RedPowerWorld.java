@@ -62,7 +62,7 @@ import net.minecraftforge.oredict.OreDictionary;
 @Mod(
     modid = "RedPowerWorld",
     name = "RedPower World",
-    version = "2.0pr7",
+    version = RedPowerBase.VERSION,
     dependencies = "required-after:RedPowerBase"
 )
 public class RedPowerWorld implements IGuiHandler {

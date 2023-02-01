@@ -49,7 +49,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(
     modid = "RedPowerLogic",
     name = "RedPower Logic",
-    version = "2.0pr7",
+    version = RedPowerBase.VERSION,
     dependencies = "required-after:RedPowerBase"
 )
 public class RedPowerLogic implements IGuiHandler {

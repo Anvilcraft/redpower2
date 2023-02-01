@@ -69,10 +69,11 @@ import net.minecraftforge.oredict.OreDictionary;
 @Mod(
     modid = "RedPowerBase",
     name = "RedPower Base",
-    version = "2.0pr7",
+    version = RedPowerBase.VERSION,
     dependencies = "required-after:RedPowerCore"
 )
 public class RedPowerBase implements IGuiHandler {
+    public static final String VERSION = "2.0pr8";
     @Instance("RedPowerBase")
     public static RedPowerBase instance;
     public static BlockAppliance blockAppliance;

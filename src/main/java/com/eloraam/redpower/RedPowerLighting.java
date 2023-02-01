@@ -34,7 +34,7 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(
     modid = "RedPowerLighting",
     name = "RedPower Lighting",
-    version = "2.0pr7",
+    version = RedPowerBase.VERSION,
     dependencies = "required-after:RedPowerBase"
 )
 public class RedPowerLighting {

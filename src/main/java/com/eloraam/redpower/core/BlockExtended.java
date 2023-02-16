@@ -151,7 +151,7 @@ public class BlockExtended extends BlockContainer {
 
     public int isProvidingWeakPower(IBlockAccess iba, int x, int y, int z, int side) {
         TileExtended tl = CoreLib.getTileEntity(iba, x, y, z, TileExtended.class);
-        return tl != null && tl.isBlockWeakPoweringTo(side) ? 1 : 0;
+        return tl != null && tl.isBlockWeakPoweringTo(side) ? 15 : 0;
     }
 
     public boolean onBlockActivated(

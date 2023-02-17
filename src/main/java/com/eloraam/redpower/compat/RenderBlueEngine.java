@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 public class RenderBlueEngine extends RenderCustomBlock {
     private static ResourceLocation res

@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -48,6 +47,10 @@ public class RenderRedwire extends RenderWiring {
             int indconex = wiring.EConEMask;
             switch (metadata) {
                 case 1:
+                    // FIXME: This is a workaround for a bug in frames.
+                    if (!(wiring instanceof TileRedwire))
+                        break;
+
                     TileRedwire tx = (TileRedwire) wiring;
                     super.context.setTint(
                         0.3F + 0.7F * ((float) tx.PowerState / 255.0F), 0.0F, 0.0F
@@ -133,7 +136,9 @@ public class RenderRedwire extends RenderWiring {
                 IIcon icon;
                 switch (metadata) {
                     case 1:
-                        icon = ((TileRedwire) wiring).PowerState > 0
+                        // FIXME: This is a workaround for a bug in frames.
+                        icon = !(wiring instanceof TileRedwire)
+                                || ((TileRedwire) wiring).PowerState > 0
                             ? RedPowerWiring.redwireCableOn
                             : RedPowerWiring.redwireCableOff;
                         break;

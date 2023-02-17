@@ -314,12 +314,9 @@ public class TileMotor extends TileExtended
                         }
 
                         if (ifs.movingBlock != Blocks.air) {
-                            boolean ir = super.worldObj.isRemote;
-                            super.worldObj.isRemote = true;
                             super.worldObj.setBlock(
                                 s2.x, s2.y, s2.z, ifs.movingBlock, ifs.movingBlockMeta, 2
                             );
-                            super.worldObj.isRemote = ir;
                             if (ifs.movingTileEntity != null) {
                                 ifs.movingTileEntity.xCoord = s2.x;
                                 ifs.movingTileEntity.yCoord = s2.y;

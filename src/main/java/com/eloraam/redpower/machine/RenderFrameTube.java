@@ -46,6 +46,7 @@ public class RenderFrameTube extends RenderTube {
         super.context.readGlobalLights(
             world, frameTube.xCoord, frameTube.yCoord, frameTube.zCoord
         );
+        tess.startDrawingQuads();
         if (frameTube.CoverSides > 0) {
             short[] sides = new short[6];
 
@@ -64,7 +65,6 @@ public class RenderFrameTube extends RenderTube {
             world, frameTube.xCoord, frameTube.yCoord, frameTube.zCoord
         );
         super.context.exactTextureCoordinates = true;
-        tess.startDrawingQuads();
         super.context.setIcon(RedPowerMachine.frameCovered);
         int sides = frameTube.CoverSides | conn;
 

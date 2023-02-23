@@ -45,6 +45,7 @@ dependencies {
     implementation "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
     implementation "codechicken:CodeChickenCore:1.7.10-1.0.7.48:dev"
     implementation 'dan200:ComputerCraft:1.75:deobf'
+    implementation "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev"
 }
 
 processResources {

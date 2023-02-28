@@ -73,7 +73,7 @@ import net.minecraftforge.oredict.OreDictionary;
     dependencies = "required-after:RedPowerCore"
 )
 public class RedPowerBase implements IGuiHandler {
-    public static final String VERSION = "2.0pr8";
+    public static final String VERSION = "{VERSION}";
     @Instance("RedPowerBase")
     public static RedPowerBase instance;
     public static BlockAppliance blockAppliance;

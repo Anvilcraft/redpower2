@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderLib {
     private static RenderLib.RenderListEntry[] renderers
-        = new RenderLib.RenderListEntry[4096];
+        = new RenderLib.RenderListEntry[65535];
 
     public static void
     renderSpecialLever(Vector3 pos, Quat rot, IIcon foundation, IIcon lever) {

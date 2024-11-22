@@ -23,7 +23,7 @@ apply plugin: 'maven-publish'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-version = "2.0pr10-dirty"
+version = "2.0pr11-dirty"
 group= "com.eloraam.redpower"
 archivesBaseName = "redpower"
 
